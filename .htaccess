@@ -2,7 +2,8 @@ Options -multiviews
 
 RewriteEngine On 
 
-RewriteBase /foldername_under_htdocs
+RewriteBase /
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
