@@ -16,7 +16,7 @@ class App{
 
 	public function __construct(){
 		//echo "A new App is born";
-		echo $_GET['url'];
+		//echo $_GET['url'];
 		//placing the routing algorith here
 		//TODO replace this echo with the routing algorithm
 		//goal is to separate url in parts
@@ -29,21 +29,21 @@ class App{
 		//use the first part to determine if the controller class to load
 
 		if(isset($url[0])){
-			if(filter_exists('app/controller/' .$url[0] .'php')){
+			if(file_exists('app/controllers/' .$url[0] .'php')){
 				$this ->controller = $url[0]; //$this refers to the current object
 			}
 			unset($url[0]);
 		}
-		$this->controller ='app\\controllers\\' .this->controller; //providea fully qualified classname
+		$this->controller ='app\\controllers\\' . $this->controller; //providea fully qualified classname
 		$this -> controller= new $this-> controller; 
 
 
 		if(isset($url[1])){
-			if(method_exists($this->contr, $url[1])){
+			if(method_exists($this->controller, $url[1])){
 				$this->method = $url[1];
 			}
 
-			unset($url[1])
+			unset($url[1]);
 		}
 
 		var_dump($url);
