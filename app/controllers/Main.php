@@ -31,8 +31,8 @@ class Main extends \app\core\controller{
 
 		//gett all the food
 
-		$foods = new \app\moodels\Food();
-		$foods = $food->getAll();
+		$foods = new \app\models\Food();
+		$foods = $foods->getAll();
 		var_dump($foods);
 
 		//call a view that displays the file contents

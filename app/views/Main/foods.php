@@ -17,7 +17,7 @@
 		<?php
 			foreach($message as $key => $value){
 				echo "<tr><td>$food->id</td> <td>$value->name </td></tr>";
-				"<a href ='/Food/delete/$food->id'> Delete</a>" . "</td</tr>"
+				"<a href ='/Food/delete/$food->id'> Delete</a>" . "</td</tr>";
 			}
 
 		?>
