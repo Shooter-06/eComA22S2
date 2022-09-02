@@ -51,14 +51,13 @@ class Food{
 
 		//write everything back 
 		$fh =fopen(self::$file, 'w');
-		flock($fk, LOCK_EX);
-		foreach ($variable as $key => $value) {
-
-			fwrite($fh, $this->name);
-			flock($fk, LOCK_UN);
-
-			fclose($fh);
+		flock($fh, LOCK_EX);
+		foreach ($foods as $key => $value) {
+			fwrite($fh, $value);
 		}
+
+		flock($fh, LOCK_UN);
+		fclose($fh);
 	}
 	public function __toString(){
 		return $this->name;

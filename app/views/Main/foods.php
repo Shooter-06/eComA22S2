@@ -8,16 +8,16 @@
 
 
 <body>
-	
 
 	Here is a list of foods from our database
 
 	<table>
 		<tr><th>id</th><th>name</th><th>action</th></tr>
 		<?php
-			foreach($message as $key => $value){
-				echo "<tr><td>$food->id</td> <td>$value->name </td></tr>";
-				"<a href ='/Food/delete/$food->id'> Delete</a>" . "</td</tr>";
+			foreach($data as $food){
+				echo "<tr><td>$food->id</td>
+				<td>$food->name</td>
+				<td><a href ='/Food/delete/$food->id'> Delete</a></td</tr>";
 			}
 
 		?>
