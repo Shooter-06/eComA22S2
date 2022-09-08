@@ -29,13 +29,13 @@ class App{
 		//use the first part to determine if the controller class to load
 
 		if(isset($url[0])){
-			if(file_exists('app/controllers/' .$url[0] .'php')){
-				$this ->controller = $url[0]; //$this refers to the current object
+			if(file_exists('app/controllers/' . $url[0] .'.php')){
+				$this->controller = $url[0]; //$this refers to the current object
 			}
 			unset($url[0]);
 		}
 		$this->controller ='app\\controllers\\' . $this->controller; //providea fully qualified classname
-		$this -> controller= new $this-> controller; 
+		$this->controller= new $this->controller; 
 
 
 		if(isset($url[1])){
@@ -46,11 +46,12 @@ class App{
 			unset($url[1]);
 		}
 
-		var_dump($url);
+		//var_dump($url);
 		//...while passing all other parts as arguments
 		//replackage the parameters
 
 		$params = $url ? array_values($url):[];
+
 
 		call_user_func_array([$this->controller, $this->method], $params);
 

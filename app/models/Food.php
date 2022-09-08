@@ -59,6 +59,7 @@ class Food{
 		flock($fh, LOCK_UN);
 		fclose($fh);
 	}
+	
 	public function __toString(){
 		return $this->name;
 	}
