@@ -1,14 +1,13 @@
 <?php
 namespace app\controllers;
 
-class Main extends \app\core\controller{
+class Main extends \app\core\Controller{
 	public function index(){
 		$this-> view('Main/index');
-		echo "wassup ";
 	}
 
 	public function index2(){
-		echo "Main Index";
+		$this-> view('Main/index2');
 	}
 
 	public function say($message="Default message"){
@@ -17,20 +16,15 @@ class Main extends \app\core\controller{
 
 	public function foods(){
 
-		//TOD: Refactor 
-		// var_dump($_POST);
-		//run different code when i send stuff 
+		//TOD: Refactor to place access in a model class!
+		// the form is submitted
 		if(isset($_POST['action'])){
 			$food = new \app\models\Food();
 			$food->name = $_POST['new_food'];
 			$food->insert();
 		}
 
-		//read a file
-		//echo getcwd();
-
 		//gett all the food
-
 		$foods = new \app\models\Food();
 		$foods = $foods->getAll();
 		
@@ -40,13 +34,16 @@ class Main extends \app\core\controller{
 	}
 
 	public function foodsJSON(){
+		//get all the food
 		$food = new \app\models\Food();
 		$food = $food -> getAll();
 
+		//calla view that displays the file contents
 		echo json_encode($foods);
 	}
 
-	pubic function foodsDisplay(){
-		$this->view('Main/foodsDisplay')
+	//the consumer:
+	public function foodsDisplay(){
+		$this->view('Main/foodsDisplay');
 	}
 }
