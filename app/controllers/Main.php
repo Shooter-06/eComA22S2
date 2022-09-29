@@ -10,39 +10,36 @@ class Main extends \app\core\Controller{
 		$this-> view('Main/index2');
 	}
 
-	public function say($message="Default message"){
-		$this-> view('Main/say', $message);
-	}
-
 	public function foods(){
 
-		//TOD: Refactor to place access in a model class!
-		// the form is submitted
+		//process the form data if it is submitted
 		if(isset($_POST['action'])){
-			$food = new \app\models\Food();
-			$food->name = $_POST['new_food'];
-			$food->insert();
+			//create a Food object
+			$newfood = new \app\models\Food();
+			//populate the Food object
+			$newfood->name = $_POST['new_food'];
+			//call insert
+			$newfood->insert();
 		}
 
-		//gett all the food
+		//pass the foods.txt file into a variable
 		$foods = new \app\models\Food();
 		$foods = $foods->getAll();
 		
-
-		//call a view that displays the file contents
+		//pass the foodsto the view for render and output
 		$this->view('Main/foods', $foods);
 	}
 
+
 	public function foodsJSON(){
-		//get all the food
+		//service that outputs JSON
+		//read the foods.txt file into a variable
 		$food = new \app\models\Food();
 		$food = $food -> getAll();
 
-		//calla view that displays the file contents
 		echo json_encode($foods);
 	}
-
-	//the consumer:
+	
 	public function foodsDisplay(){
 		$this->view('Main/foodsDisplay');
 	}
