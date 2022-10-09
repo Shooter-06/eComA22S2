@@ -8,25 +8,25 @@
 <script type="text/javascript">
 $(document).ready(
 	function(){
-		$.getJSON( "/Main/foddsJSON", 
-			function(obj){
-				output ="";
-				for(const item of obj){
-					output = output+ item.name +" has the id"+ item.id + "<br>";
-				}
-				$('#foods').html(output);
+		$.getJSON("/Main/foodsJSON",
+			function( obj ) {
+				output = "";
+				for (const item of obj) {
+			  		output = output + item.name + " has the id " + item.id + "<br>";
+ 				}
+ 				$('#foods').html(output);
 			}
-		)	
+		)
 	}
-);	
+);
 
 </script>
 
 </head>
 <body>
-Here is a list of foods from our database
+Here is the list of foods from our database
 <div id="foods">
-
+	
 </div>
 </body>
 
