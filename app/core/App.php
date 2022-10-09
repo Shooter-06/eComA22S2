@@ -32,6 +32,23 @@ class App{
 			unset($url[1]);
 		}
 
+		//access filtering here to prevent running code requiring privilege
+		//object to read the class properties
+		$reflection = new \ReflectionObject($this->controller);
+		//get the attributes
+		$classAttributes = $reflection->getAttributes();//retruns the attributes applied on the class
+		$methoodAttributes =$reflection->getMethod($this->method)->getAttributes();
+
+		//merge the arrays
+		$attributes = array_values(array_merge($classAttributes, $methoodAttributes));
+
+		foreach ($attributes as $attribute){
+			$filter =$attribute->newInstance();//make a new object of that filter class
+			if($filter->execute()){
+				return; //cut the excution if the user does not belong there 
+			}
+		}
+		
 		//...while passing all other parts as arguments
 		//repackage the parameters
 		$params = $url ? array_values($url) : [];

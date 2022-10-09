@@ -3,11 +3,11 @@ namespace app\controllers;
 
 class Main extends \app\core\Controller{
 	public function index(){
-		$this-> view('Main/index');
+		$this->view('Main/index');
 	}
 
 	public function index2(){
-		$this-> view('Main/index2');
+		$this->view('Main/index2');
 	}
 
 	public function foods(){
@@ -22,11 +22,11 @@ class Main extends \app\core\Controller{
 			$newfood->insert();
 		}
 
-		//pass the foods.txt file into a variable
-		$foods = new \app\models\Food();
-		$foods = $foods->getAll();
+		//read the foods.txt file into a variable
+		$food = new \app\models\Food();
+		$foods = $food->getAll();
 		
-		//pass the foodsto the view for render and output
+		//pass the foods to the view for render and output
 		$this->view('Main/foods', $foods);
 	}
 
@@ -35,12 +35,14 @@ class Main extends \app\core\Controller{
 		//service that outputs JSON
 		//read the foods.txt file into a variable
 		$food = new \app\models\Food();
-		$food = $food -> getAll();
-
+		$foods = $food->getAll();
+		
 		echo json_encode($foods);
 	}
-	
-	public function foodsDisplay(){
-		$this->view('Main/foodsDisplay');
+
+	public function foodsAJAX(){
+		$this->view('Main/foodsAJAX');
 	}
+
+
 }
