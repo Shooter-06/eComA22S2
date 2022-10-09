@@ -1,6 +1,9 @@
 <?php
 namespace app\models;
 
+//self:: refers to the class
+//$this-> refers to the object
+
 class Food{
 	private static $file ='app/Resources/foods.txt';
 	public $name;
@@ -48,4 +51,5 @@ class Food{
 	public function __toString(){
 		return $this->name;
 	}
+	
 }
