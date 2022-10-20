@@ -2,7 +2,7 @@
 namespace app\validators;
 
 #[\Attribute]
-class ValidDate extends \app\core\Validator{
+class validBirthDateForAnimal extends \app\core\Validator{
 	public function isValidData($data){
 		//make sure the animal was not born more than 500 yrs ago
 		$date1 =date_create();

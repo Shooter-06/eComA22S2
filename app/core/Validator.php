@@ -2,5 +2,5 @@
 namespace app\core;
 
 class Validator{
-	abstract function isValidData($data);
+	abstract public function isValidData($data);
 }

@@ -20,17 +20,16 @@ class Model{
 		}
 	}
 
-	protected function isValid(){
-		//discover attributes on the class properties and rin the tests to validate the values in the properties 
+		function isValid(){//aplication of all validators on the object properties
 		$reflection = new \ReflectionObject($this);
-		$classProperties = $reflection ->getProperties();
-		foreach ($cla as $prope) {
+		//find the properties
+		$classProperties = $reflection->getProperties();
+		foreach ($classProperties as $property) {
 			$propertyAttributes = $property->getAttributes();
 			foreach ($propertyAttributes as $attribute) {
 				$test = $attribute->newInstance();
-				if(!$test->isValidData($property->getValue($this))){
+				if(!$test->isValidData($property->getValue($this)))
 					return false;
-				}
 			}
 		}
 		return true;
