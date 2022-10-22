@@ -1,4 +1,4 @@
-..-5.<?php
+<?php
 namespace app\core;
 
 class Controller{

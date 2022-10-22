@@ -2,8 +2,8 @@
 namespace app\validators;
 
 #[\Attribute]
-class Name extends \app\core\Validator{
+class NonEmpty extends \app\core\validator{
 	public function isValidData($data){
-		return preg_match('/\w+/u',$dat) != false;
+		return !empty($data);
 	}
 }
