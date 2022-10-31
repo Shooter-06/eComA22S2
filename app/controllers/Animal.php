@@ -9,7 +9,7 @@ class Animal extends \app\core\Controller{
 		$owner = $owner->get($owner_id);
 		$animal = new \app\models\Animal();
 		$animals = $animal->getAll($owner_id);
-		$this->view('Animal/index',['owner'=>$owner, 'animals'=>$animals]);//TODO: build ths view
+		$this->view('Animal/index',['owner'=>$owner, 'animals'=>$animals]);//TODO: bluild ths view
 	}
 
 	public function add($owner_id){
