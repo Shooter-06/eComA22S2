@@ -1,7 +1,7 @@
 <?php
-namespace app\controllers;
+namespace app\models;
 
-class Animal extends \app\core\Controller{
+class Animal extends \app\core\Model{
 	
 	public $animal_id;
 	#[\app\validators\NonEmpty]
@@ -11,10 +11,11 @@ class Animal extends \app\core\Controller{
 	#[\app\validators\AnimalBirthDate]
 	public $dob; 
 
-	public function getAll($owner_id){
-		$SQL="SELECT * FROM animal WHERE owner_id =:owner_id";
+	public function getAll(){
+		$SQL="SELECT * FROM animal";
 		$STMT = self::$_connection->prepare($SQL);
-		$STMT->execute(['owner_id'=>$owner_id]); //this is where we would pass the data 
+		$STMT->execute(); 
+		//this is where we would pass the data 
 		//run some code to return the results
 		$STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Animal');
 		return $STMT->fetchAll();
@@ -30,14 +31,12 @@ class Animal extends \app\core\Controller{
 	}
 
 	public function insert(){
-		if(!this->isValid()) 
-			return false; 
 		$SQL= "SELECT INTO animal(owner_id, name, dob, profile_pic)VALUES (:owner_id, :name, :dob, :profile_pic)";
 		$STMT = self::$_connection->prepare($SQL);
 		$STMT->execute(['owner_id'=>$this->owner_id,
-						'name'=>$this->name, '
-						dob'=>$this->dob, 
-						'profile_pic'=>$this->profile_pic]); 
+										'name'=>$this->name,
+										'dob'=>$this->dob, 
+										'profile_pic'=>$this->profile_pic]); 
 	}
 
 	public function update(){
@@ -47,7 +46,7 @@ class Animal extends \app\core\Controller{
 		$STMT = self::$_connection->prepare($SQL);
 		$STMT->execute(['name'=>$this->name, 
 						'dob'=>$this->dob, 
-						'profile_pic'=>$this->profile_pic
+						'profile_pic'=>$this->profile_pic,
 						'animal_id'=>$this->animal_id]); 
 	}
 

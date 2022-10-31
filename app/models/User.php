@@ -1,10 +1,11 @@
 <?php
 namespace app\models;
 
-class User extends \app\core\models{
+class User extends \app\core\Model{
 	public function get($username){
-		$SQL = "SELET * FROM user WHERE username LIKE :username";
+		$SQL = "SELECT * FROM user WHERE username LIKE :username";
 		$STMT = self::$_connection->prepare($SQL);
+		$STMT->execute(['username'=>$username]);
 		//run some code to return the results
 		$STMT->setFetchMode(\PDO::FETCH_CLASS,'app\models\User');
 		return $STMT->fetch();

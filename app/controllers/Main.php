@@ -44,5 +44,9 @@ class Main extends \app\core\Controller{
 		$this->view('Main/foodsAJAX');
 	}
 
-
+	// Use: /Default/makeQRCode?data=protocol://address
+	public function makeQRCode(){
+		$data = $_GET['data'];
+		\QRcode::png($data);
+	}
 }

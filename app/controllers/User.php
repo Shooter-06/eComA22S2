@@ -15,6 +15,7 @@ class User extends \app\core\Controller{
 				$_SESSION['username'] = $user->username;
 				$_SESSION['user_id'] = $user->user_id;
 				$_SESSION['role'] = $user->role;
+				$_SESSION['secret_key']=$user->secret_key;
 				header('location:/User/account');
 			}else{
 				//incorret password provided
@@ -22,6 +23,20 @@ class User extends \app\core\Controller{
 			}
 		}else{
 			$this->view('User/index');
+		}
+	}
+
+	public function check2fa(){
+		if(!isset($_SESSION['user_id'])) header('location:/User/index');
+		if(isset($_POST['action'])){
+			$currentcode =$_POST['currentcode'];
+			if(\app\core\TokenAuth6238::verify(
+				$_SESSION['secret_key'],$currentcode)){
+				$_SESSION['secret_key']=null;
+				header("location:/User/account");
+			}
+		}else{
+			$this->view('User/check2fa');
 		}
 	}
 
@@ -84,5 +99,47 @@ class User extends \app\core\Controller{
 			//show the registration form
 			$this->view('User/register');
 		}
+	}
+	//update password 
+
+
+	#[\app\filters\Login]
+	public function twofasetup(){
+		if(isset($_POST['action'])){
+			$currentcode = $_POST['currentCode'];
+			if(\app\core\TokenAuth6238::verify(
+			$_SESSION['secretkey'],$currentcode)){
+			//the user has verified their proper 2-factor authentication setup
+			$user = new \App\models\User();
+			$user->user_id = $_SESSION['user_id'];
+			$user->secret_key = $_SESSION['secretkey'];
+			$user->update2fa();
+			header('location:/Somewhere***');
+			}else{
+				header('location:/User/twofasetup?error=token not verified!');//reload
+			}
+		}else{
+			$secretkey = \app\core\TokenAuth6238::generateRandomClue();
+			$_SESSION['secretkey'] = $secretkey;
+			$url = \App\core\TokenAuth6238::getLocalCodeUrl(
+				$_SESSION['username'],
+				'Example.com',
+				$secretkey,
+				'Awesome Example App');
+			$this->view('User/twofasetup', $url);
+		}
+	}
+
+	public function makeQRCode(){
+		$data = $_GET['data'];
+		\QRcode::png($data);
+	}
+
+
+	public function update2fa(){
+		$SQL = "UPDATE user SET secret_key=:secret_key WHERE user_id=:user_id";
+		$STMT = self::$_connection->prepare($SQL);
+		$STMT->execute(['secret_key'=>$this->secret_key,
+						'user_id'=>$this->user_id]);
 	}
 }

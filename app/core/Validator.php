@@ -1,6 +1,6 @@
 <?php
 namespace app\core;
 
-class Validator{
+abstract class Validator{
 	abstract public function isValidData($data);
 }

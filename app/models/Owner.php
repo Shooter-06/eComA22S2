@@ -50,7 +50,5 @@ class Owner extends \app\core\Model{
 		$STMT = self::$_connection->prepare($SQL);
 		$STMT->execute(['owner_id'=>$this->owner_id]);
 	}
-
-
 	
 }
