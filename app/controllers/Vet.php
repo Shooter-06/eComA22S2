@@ -6,6 +6,9 @@ class Vet extends \app\core\Controller{
 		//display all the owners in the database
 		//make an owner object
 		$owner = new \app\models\Owner();
+
+		echo \Locale::getDefault();
+		
 		//call getAll on that object to get the collection of all owners
 		$owners = $owner->getAll();
 		//call a view and pass the collection for display

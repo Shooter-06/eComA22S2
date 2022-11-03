@@ -5,9 +5,13 @@ class Animal extends \app\core\Controller{
 	
 	//list the animals owned by a specific owner
 	public function index($owner_id){
+
 		$owner = new \app\models\Owner();
 		$owner = $owner->get($owner_id);
 		$animal = new \app\models\Animal();
+
+		echo \Locale::getDefault();
+
 		$animals = $animal->getAll($owner_id);
 		$this->view('Animal/index',['owner'=>$owner, 'animals'=>$animals]);//TODO: bluild ths view
 	}
@@ -23,7 +27,10 @@ class Animal extends \app\core\Controller{
 			$animal->owner_id = $owner_id;
 			$animal->profile_pic = $filename;
 
+			echo \Locale::getDefault();
+
 			$animal->insert();
+			
 
 			header('location:/Animal/index/' . $owner_id);
 		}else{
@@ -78,5 +85,9 @@ class Animal extends \app\core\Controller{
 		$owner_id = $animal->owner_id;
 		$animal->delete();
 		header('location:/Animal/index/' . $owner_id);
+	}
+
+	public function intern(){
+		echo Locale::getDefault();
 	}
 }

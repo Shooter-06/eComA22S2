@@ -8,7 +8,7 @@
 <body>
 <h1>Client Information</h1>
 <?php
-	$this->view('Owner/detailsPartial', $data['owner']);
+	_("$this->view('Owner/detailsPartial', $data['owner'])");
 ?>
 <h1>New Pet Information</h1>
 <form action='' method='post' enctype="multipart/form-data">
@@ -26,7 +26,7 @@ profile_pic.onchange = evt => {
   }
 }
 
-file = "<?= $data['animal']->profile_pic ?>";
+file = "<?= _("$data['animal']->profile_pic") ?>";
 if (file != "") {
 	document.getElementById("profile_pic_preview").src = "/images/" + file;
 }
@@ -34,7 +34,7 @@ if (file != "") {
 
 </script>
 
-<a href="/Animal/index/<?= $data['owner']->owner_id ?>">Cancel</a>
+<a href="/Animal/index/<?=_("$data['owner']->owner_id")?>">Cancel</a>
 
 </body>
 </html>

@@ -7,7 +7,7 @@
 
 <body>
 <!-- display the details for this client/owner -->
-<?php $this->view('Owner/detailsPartial', $data['owner']); ?>
+<?php $this->view('Owner/detailsPartial', $data['owner']) ?>
 
 <p><!--display the list of animals owned by this client/owner-->
 	<a href="/Animal/add/<?= $data['owner']->owner_id ?>">Add a new animal</a>
@@ -20,7 +20,7 @@
 		<td type=name>$item->name</td>
 		<td type=name>$item->dob</td>
 		<td type=action>
-		<a href='/Animal/edit/$item->animal_id'>edit</a> | 
+		<a href='/Animal/edit/$item->animal_id'>"._("edit")."</a> | 
 		<a href='/Animal/details/$item->animal_id'>details</a> |
 		<a href='/Animal/delete/$item->animal_id'>delete</a>
 		</td>

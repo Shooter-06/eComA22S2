@@ -7,7 +7,7 @@
 
 <body>
 <h1>Client information</h1>
-<?php $this->view('Owner/detailsPartial',$data['owner']); ?>
+<?php $this->view('Owner/detailsPartial',$data['owner']) ?>
 
 <h1>Animal information</h1>
 <dl>
@@ -15,13 +15,13 @@
 		Name:
 	</dt>
 	<dd>
-		<?= $data['animal']->name ?>
+		<?= _(" $data['animal']->name ") ?>
 	</dd>
 	<dt>
 		Date of Birth:
 	</dt>
 	<dd>
-		<?= $data['animal']->dob ?>
+		<?= _(" $data['animal']->dob ") ?>
 	</dd>
 	<dt>
 		Picture:
@@ -34,13 +34,13 @@
 
 
 <script>
-file = "" + "<?= $data['animal']->profile_pic ?>"
+file = "" + "<?= $data['animal']->profile_pic?>"
 if (file != "") {
 	document.getElementById("profile_pic_preview").src = "/images/" + file;
 }
 </script>
 
-<a href='/Animal/index/<?= $data['owner']->owner_id ?>'>Back to index</a>
+<a href='/Animal/index/<?= _("$data['owner']->owner_id") ?>'>Back to index</a>
 
 </body>
 </html>

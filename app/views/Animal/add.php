@@ -8,13 +8,13 @@
 <body>
 <h1>Client Information</h1>
 <?php 
-	$this->view('Owner/detailsPartial', $data['owner']); 
+	$this->view('Owner/detailsPartial', $data['owner'])
 ?>
 <h1>New Pet Information</h1>
 <form action='' method='post' enctype="multipart/form-data">
-	<label>Name:<input type="text" name="name" /></label><br>
-	<label>Date Of Birth:<input type="date" name="dob" /></label><br>
-	<label>Profile Picture:<input type="file" name="profile_pic" id="profile_pic" /></label><img id ='profile_pic_preview' src='/images/blank.jpg' style="max-width:200px; max-height: 200px" /><br>
+	<label><?= _("Name") ?> :<input type="text" name="name" /></label><br>
+	<label><?= _("Date Of Birth")?> :<input type="date" name="dob" /></label><br>
+	<label><?= _("Profile Picture")?>:<input type="file" name="profile_pic" id="profile_pic" /></label><img id ='profile_pic_preview' src='/images/blank.jpg' style="max-width:200px; max-height: 200px" /><br>
 	<input type="submit" name="action" value="Add new pet" />
 </form>
 
