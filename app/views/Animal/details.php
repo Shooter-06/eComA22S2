@@ -23,6 +23,14 @@
 	<dd>
 		<?= _(" $data['animal']->dob ") ?>
 	</dd>
+
+	<dt>
+		country of Origin:
+	</dt>
+	<dd>
+		<?= _(" $data['animal']->nicename ") ?>
+	</dd>
+
 	<dt>
 		Picture:
 	</dt>
