@@ -24,6 +24,7 @@ class Animal extends \app\core\Controller{
 
 			$animal->name = $_POST['name'];
 			$animal->dob = $_POST['dob'];
+			$animal->country_id=$_POST['country_id'];
 			$animal->owner_id = $owner_id;
 			$animal->profile_pic = $filename;
 
@@ -36,9 +37,15 @@ class Animal extends \app\core\Controller{
 		}else{
 			$owner = new \app\models\Owner();
 			$owner = $owner->get($owner_id);
-			$this->view('Animal/add',['owner'=>$owner]);
+			$country = new \app\models\Country();
+			$countries= $country->getAll();
+			$this->view('Animal/add',['owner'=>$owner, 'country'=>$countries]);
 		}
 	}
+
+	public function insert(){}
+
+	public function update(){}
 
 	public function edit($animal_id){
 		$animal = new \app\models\Animal();
