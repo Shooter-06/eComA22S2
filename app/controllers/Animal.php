@@ -63,6 +63,8 @@ class Animal extends \app\core\Controller{
 			}
 			$animal->name = $_POST['name'];
 			$animal->dob = $_POST['dob'];
+			$animal->country_id = $_POST['country_id'];
+
 
 			$animal->update();
 
@@ -70,7 +72,9 @@ class Animal extends \app\core\Controller{
 		}else{
 			$owner = new \app\models\Owner();
 			$owner = $owner->get($owner_id);
-			$this->view('Animal/edit',['owner'=>$owner, 'animal'=>$animal]);
+			$country = new \app\models\Country();
+			$country = $owner->getAll();
+			$this->view('Animal/edit',['owner'=>$owner, 'animal'=>$animal, 'country'=>$country]);
 		}
 	}
 

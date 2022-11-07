@@ -22,7 +22,7 @@ class Animal extends \app\core\Model{
 	}
 
 	public function get($animal_id){
-		$SQL="SELECT * FROM animal WHERE animal_id =:animal_id";
+		$SQL="SELECT animal.*, country.nicename FROM animal LEFT JOIN country WHERE ON animal.country_id = country.country_id WHERE animal_id =:animal_id";
 		$STMT = self::$_connection->prepare($SQL);
 		$STMT->execute(['animal_id'=>$animal_id]); 
 		//run some code to return the results
